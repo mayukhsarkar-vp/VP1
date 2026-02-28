@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Velvet Pages</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#f5efe6;
+color:#2c2c2c;
+}
+
+/* HEADER */
+header{
+background:linear-gradient(135deg,#2b1d0e,#5c3b1e);
+color:white;
+padding:80px 20px;
+text-align:center;
+}
+
+header h1{
+font-family:'Great Vibes',cursive;
+font-size:80px;
+margin:0;
+}
+
+header p{
+font-size:20px;
+opacity:0.9;
+}
+
+/* ABOUT */
+.about{
+padding:60px 10%;
+text-align:center;
+}
+
+.about h2{
+font-family:'Great Vibes';
+font-size:50px;
+color:#5c3b1e;
+}
+
+/* CATALOGUE */
+.catalogue{
+padding:60px 10%;
+background:#fff;
+}
+
+.catalogue h2{
+text-align:center;
+font-family:'Great Vibes';
+font-size:50px;
+color:#5c3b1e;
+margin-bottom:40px;
+}
+
+.books{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.book{
+background:#f9f5f0;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:center;
+transition:0.3s;
+}
+
+.book:hover{
+transform:translateY(-10px);
+}
+
+.book img{
+width:100%;
+border-radius:10px;
+}
+
+.book h3{
+margin:15px 0;
+}
+
+.price{
+color:#b8860b;
+font-size:22px;
+font-weight:600;
+}
+
+button{
+background:#5c3b1e;
+color:white;
+border:none;
+padding:12px 20px;
+margin-top:10px;
+cursor:pointer;
+border-radius:5px;
+font-size:16px;
+}
+
+button:hover{
+background:#b8860b;
+}
+
+/* CONTACT */
+.contact{
+padding:60px;
+text-align:center;
+background:#2b1d0e;
+color:white;
+}
+
+.contact h2{
+font-family:'Great Vibes';
+font-size:50px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:#000;
+color:#ccc;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Velvet Pages</h1>
+<p>Where Stories Come Alive in Elegance</p>
+<p>Founded by Mayukh Sarkar</p>
+</header>
+
+<section class="about">
+<h2>About Us</h2>
+<p>
+Velvet Pages is a premium digital bookstore crafted for readers who seek timeless elegance and immersive storytelling.
+We curate visually stunning ebooks designed to captivate minds, inspire imagination, and create unforgettable reading experiences.
+</p>
+</section>
+
+<section class="catalogue">
+<h2>Our Ebook Collection</h2>
+
+<div class="books">
+
+<div class="book">
+<img src="https://images.unsplash.com/photo-1512820790803-83ca734da794">
+<h3>The Midnight Whisper</h3>
+<p>A dark romantic mystery that grips your soul.</p>
+<div class="price">₹199</div>
+<button onclick="orderBook('The Midnight Whisper')">Order Now</button>
+</div>
+
+<div class="book">
+<img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d">
+<h3>Empire of Shadows</h3>
+<p>A cinematic thriller filled with power and ambition.</p>
+<div class="price">₹249</div>
+<button onclick="orderBook('Empire of Shadows')">Order Now</button>
+</div>
+
+<div class="book">
+<img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66">
+<h3>Love Beyond Time</h3>
+<p>A poetic romance across centuries.</p>
+<div class="price">₹149</div>
+<button onclick="orderBook('Love Beyond Time')">Order Now</button>
+</div>
+
+</div>
+</section>
+
+<section class="contact">
+<h2>Contact & Orders</h2>
+<p>Email: mayukhsarkar1319@gmail.com</p>
+<p>WhatsApp: +91 7029043459</p>
+</section>
+
+<footer>
+© 2026 Velvet Pages | Designed by Mayukh Sarkar
+</footer>
+
+<script>
+function orderBook(book){
+let message="Hello, I want to order the ebook: "+book;
+window.open("https://wa.me/917029043459?text="+encodeURIComponent(message));
+}
+</script>
+
+</body>
+</html>
