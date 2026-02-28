@@ -1,133 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Velvet Pages</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BookStore Pro</title>
 
 <style>
 body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:#f5efe6;
-color:#2c2c2c;
-scroll-behavior:smooth;
+  margin:0;
+  font-family:Segoe UI;
+  background:#0f172a;
+  color:white;
 }
 
-/* HEADER */
+/* Header */
 header{
-background:linear-gradient(135deg,#2b1d0e,#5c3b1e);
-color:white;
-padding:90px 20px;
-text-align:center;
+  padding:15px;
+  background:#020617;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-header h1{
-font-family:'Great Vibes';
-font-size:80px;
-margin:0;
+.cartBtn{
+  background:#22c55e;
+  padding:10px 18px;
+  border-radius:8px;
 }
 
-header p{
-font-size:20px;
-}
-
-/* ABOUT */
-.about{
-padding:60px 10%;
-text-align:center;
-}
-
-.about h2{
-font-family:'Great Vibes';
-font-size:50px;
-color:#5c3b1e;
-}
-
-/* BOOK GRID */
-.catalogue{
-padding:60px 10%;
-background:#fff;
-}
-
-.catalogue h2{
-text-align:center;
-font-family:'Great Vibes';
-font-size:50px;
-margin-bottom:40px;
-}
-
-.books{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
+/* Book layout */
+.container{
+  padding:20px;
 }
 
 .book{
-background:#f9f5f0;
-padding:20px;
-border-radius:12px;
-box-shadow:0 8px 20px rgba(0,0,0,0.15);
-transition:0.4s;
+  background:#1e293b;
+  margin:20px 0;
+  padding:20px;
+  border-radius:15px;
 }
 
-.book:hover{
-transform:translateY(-12px) scale(1.03);
-}
-
-.book img{
-width:100%;
-border-radius:10px;
-}
-
-.price{
-color:#b8860b;
-font-size:22px;
-font-weight:600;
+/* Cart popup */
+#cart{
+  position:fixed;
+  right:-400px;
+  top:0;
+  width:300px;
+  height:100%;
+  background:#020617;
+  padding:20px;
+  transition:0.4s;
 }
 
 button{
-background:#5c3b1e;
-color:white;
-border:none;
-padding:12px 18px;
-margin-top:10px;
-cursor:pointer;
-border-radius:6px;
-font-size:16px;
-}
-
-button:hover{
-background:#b8860b;
-}
-
-/* ORDER FORM */
-.form{
-padding:60px 10%;
-text-align:center;
-}
-
-input, textarea{
-width:80%;
-padding:12px;
-margin:10px;
-border-radius:6px;
-border:1px solid #ccc;
-}
-
-.payment{
-background:#2b1d0e;
-color:white;
-padding:50px;
-text-align:center;
-}
-
-footer{
-background:black;
-color:#ccc;
-padding:20px;
-text-align:center;
+  padding:10px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  border-radius:8px;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -135,89 +65,76 @@ text-align:center;
 <body>
 
 <header>
-<h1>Velvet Pages</h1>
-<p>Luxury Digital Bookstore</p>
-<p>Founded by Mayukh Sarkar</p>
+<h2>📚 BookStore Pro</h2>
+<div class="cartBtn" onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
 </header>
 
-<section class="about">
-<h2>About Us</h2>
-<p>
-Velvet Pages is a premium ebook destination offering visually stunning,
-emotionally immersive literary experiences crafted to captivate modern readers.
-</p>
-</section>
-
-<section class="catalogue">
-<h2>Our Ebook Collection</h2>
-
-<div class="books">
+<div class="container">
 
 <div class="book">
-<img src="https://images.unsplash.com/photo-1512820790803-83ca734da794">
-<h3>The Midnight Whisper</h3>
-<p>Dark romantic mystery</p>
-<div class="price">₹199</div>
-<button onclick="orderWhatsApp('The Midnight Whisper')">Order on WhatsApp</button>
+<h3>Atomic Habits</h3>
+<p>Change your life with tiny habits.</p>
+₹299
+<button onclick="add('Atomic Habits',299)">Add to Cart</button>
 </div>
 
 <div class="book">
-<img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d">
-<h3>Empire of Shadows</h3>
-<p>Cinematic thriller</p>
-<div class="price">₹249</div>
-<button onclick="orderWhatsApp('Empire of Shadows')">Order on WhatsApp</button>
+<h3>Rich Dad Poor Dad</h3>
+<p>Learn the mindset of the rich.</p>
+₹350
+<button onclick="add('Rich Dad',350)">Add to Cart</button>
 </div>
 
 <div class="book">
-<img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66">
-<h3>Love Beyond Time</h3>
-<p>Poetic romance</p>
-<div class="price">₹149</div>
-<button onclick="orderWhatsApp('Love Beyond Time')">Order on WhatsApp</button>
+<h3>Psychology of Money</h3>
+<p>Behavior matters more than knowledge.</p>
+₹399
+<button onclick="add('Money',399)">Add to Cart</button>
 </div>
 
 </div>
-</section>
 
-<section class="form">
-<h2 style="font-family:'Great Vibes';font-size:50px;">Place Order</h2>
+<!-- CART -->
+<div id="cart">
+<h3>Your Cart</h3>
+<div id="items"></div>
+<h4>Total: ₹<span id="total">0</span></h4>
 
-<input id="name" placeholder="Your Name">
-<input id="book" placeholder="Book Name">
-<textarea id="msg" placeholder="Message"></textarea><br>
+<input placeholder="Your Name" id="name"><br>
+<input placeholder="Phone" id="phone"><br>
 
-<button onclick="sendEmail()">Send Order via Email</button>
-</section>
-
-<section class="payment">
-<h2 style="font-family:'Great Vibes';font-size:50px;">Payment Method</h2>
-<p>Pay via UPI to:</p>
-<h3>7029043459</h3>
-<p>After payment send screenshot on WhatsApp</p>
-<button onclick="window.open('https://wa.me/917029043459')">Open WhatsApp</button>
-</section>
-
-<footer>
-© 2026 Velvet Pages | Designed by Mayukh Sarkar
-</footer>
+<button onclick="pay()">Pay via UPI</button>
+</div>
 
 <script>
-function orderWhatsApp(book){
-let msg="Hello, I want to order ebook: "+book;
-window.open("https://wa.me/917029043459?text="+encodeURIComponent(msg));
+let cart=[];
+function add(name,price){
+  cart.push({name,price});
+  update();
 }
 
-function sendEmail(){
-let name=document.getElementById("name").value;
-let book=document.getElementById("book").value;
-let msg=document.getElementById("msg").value;
+function update(){
+  document.getElementById("count").innerText=cart.length;
+  let html="", total=0;
+  cart.forEach(i=>{
+    html+=i.name+" - ₹"+i.price+"<br>";
+    total+=i.price;
+  });
+  document.getElementById("items").innerHTML=html;
+  document.getElementById("total").innerText=total;
+}
 
-let body="Name: "+name+"%0ABook: "+book+"%0AMessage: "+msg;
+function toggleCart(){
+  let c=document.getElementById("cart");
+  c.style.right = c.style.right=="0px" ? "-400px":"0px";
+}
 
-window.location.href="mailto:mayukhsarkar1319@gmail.com?subject=Ebook Order&body="+body;
+function pay(){
+  let total=document.getElementById("total").innerText;
+  let upi=`upi://pay?pa=7029043459@upi&pn=BookStore&am=${total}`;
+  window.location.href=upi;
 }
 </script>
 
 </body>
-  </html>
+</html>
