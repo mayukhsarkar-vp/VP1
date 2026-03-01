@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Pages | Ebooks</title>
+    <style>
+        :root {
+            --bg-color: #050a14;
+            --text-light: #f1f5f9;
+            --accent-gold: #fbbf24;
+            --beam-color: rgba(251, 191, 36, 0.12);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- THE LIGHTHOUSE FLICKER ENGINE --- */
+        .beam-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .light-source {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-gold);
+            box-shadow: 0 0 60px 25px var(--accent-gold);
+            border-radius: 50%;
+            animation: lightPulse 4s infinite ease-in-out;
+        }
+
+        .beam {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            width: 500px;
+            height: 150vh;
+            background: linear-gradient(to bottom, var(--beam-color), transparent);
+            transform: translateX(-50%);
+            clip-path: polygon(49% 0, 51% 0, 100% 100%, 0% 100%);
+            animation: beamShimmer 6s infinite alternate;
+        }
+
+        @keyframes lightPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.9); }
+            52% { opacity: 0.9; } /* Subtle flicker */
+        }
+
+        @keyframes beamShimmer {
+            0% { opacity: 0.8; transform: translateX(-50%) rotate(-0.5deg); }
+            100% { opacity: 1; transform: translateX(-50%) rotate(0.5deg); }
+        }
+
+        /* --- CONTENT --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at top, #1e293b 0%, transparent 70%);
+        }
+
+        h1 { font-size: 4rem; letter-spacing: 8px; margin: 0; font-weight: 200; }
+        .tagline { margin-top: 15px; opacity: 0.6; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+
+        .book-section {
+            padding: 0 20px 200px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .book-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 60px 40px;
+            margin-bottom: 250px;
+            border-radius: 4px;
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            backdrop-filter: blur(8px);
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .book-card:hover {
+            border-color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .price { font-size: 2rem; color: var(--accent-gold); margin: 25px 0; font-weight: 300; }
+
+        /* --- BUTTONS --- */
+        .btn-group { display: flex; gap: 15px; justify-content: center; }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .order-btn { background: var(--accent-gold); color: #000; font-weight: bold; }
+        .cart-btn { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
+        
+        .btn:hover { letter-spacing: 2px; box-shadow: 0 0 20px rgba(251, 191, 36, 0.2); }
+
+        footer { text-align: center; padding: 100px 20px; opacity: 0.3; font-size: 0.7rem; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <div class="beam-container">
+        <div class="light-source"></div>
+        <div class="beam"></div>
+    </div>
+
+    <header>
+        <h1>VELVET PAGES</h1>
+        <div class="tagline">Minimalist Ebooks & Stories</div>
+    </header>
+
+    <div class="book-section">
+        <div class="book-card">
+            <h2>The First Chapter</h2>
+            <p>An exploration into the art of beginning.</p>
+            <div class="price">₹99</div>
+            <div class="btn-group">
+                <a href="https://wa.me/917029043459?text=Order:%20The%20First%20Chapter" class="btn order-btn">Order via WhatsApp</a>
+                <button class="btn cart-btn">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <h2>Velvet Nights</h2>
+            <p>A collection of midnight thoughts and poetry.</p>
+            <div class="price">₹199</div>
+            <div class="btn-group">
+                <a href="https://wa.me/917029043459?text=Order:%20Velvet%20Nights" class="btn order-btn">Order via WhatsApp</a>
+                <button class="btn cart-btn">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <h2>The Lighthouse Keeper</h2>
+            <p>A deep dive into solitude and creativity.</p>
+            <div class="price">₹299</div>
+            <div class="btn-group">
+                <a href="https://wa.me/917029043459?text=Order:%20The%20Lighthouse%20Keeper" class="btn order-btn">Order via WhatsApp</a>
+                <button class="btn cart-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 VELVET PAGES | PH: 7029043459
+    </footer>
+
+</body>
+</html>
