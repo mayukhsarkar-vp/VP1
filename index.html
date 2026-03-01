@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velvet Pages | Ebooks</title>
+    <title>Velvet Pages | Minimalist Ebooks</title>
     <style>
         :root {
             --bg-color: #050a14;
@@ -19,11 +19,11 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-light);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', serif;
             overflow-x: hidden;
         }
 
-        /* --- THE LIGHTHOUSE FLICKER ENGINE --- */
+        /* --- LIGHTHOUSE & BEAM --- */
         .beam-container {
             position: fixed;
             top: 0;
@@ -62,7 +62,7 @@
         @keyframes lightPulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.7; transform: scale(0.9); }
-            52% { opacity: 0.9; } /* Subtle flicker */
+            52% { opacity: 0.9; }
         }
 
         @keyframes beamShimmer {
@@ -70,65 +70,98 @@
             100% { opacity: 1; transform: translateX(-50%) rotate(0.5deg); }
         }
 
-        /* --- CONTENT --- */
-        header {
+        /* --- CART UI --- */
+        #cart-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--accent-gold);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 300px;
             height: 100vh;
+            background: #0a0f1a;
+            border-left: 1px solid var(--accent-gold);
+            z-index: 101;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 30px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        /* --- PAGE CONTENT --- */
+        header {
+            height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle at top, #1e293b 0%, transparent 70%);
         }
 
-        h1 { font-size: 4rem; letter-spacing: 8px; margin: 0; font-weight: 200; }
-        .tagline { margin-top: 15px; opacity: 0.6; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        h1 { font-size: 3.5rem; letter-spacing: 10px; font-weight: 200; margin: 0; }
+        .tagline { opacity: 0.5; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px; }
 
         .book-section {
-            padding: 0 20px 200px 20px;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
+            padding-bottom: 200px;
         }
 
         .book-card {
             background: rgba(255, 255, 255, 0.03);
-            padding: 60px 40px;
-            margin-bottom: 250px;
+            padding: 50px 30px;
+            margin-bottom: 200px;
             border-radius: 4px;
             border: 1px solid rgba(251, 191, 36, 0.1);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             text-align: center;
-            transition: 0.5s;
+            transition: 0.4s;
         }
 
-        .book-card:hover {
-            border-color: var(--accent-gold);
-            background: rgba(255, 255, 255, 0.05);
-        }
+        .book-card:hover { border-color: var(--accent-gold); }
 
-        .price { font-size: 2rem; color: var(--accent-gold); margin: 25px 0; font-weight: 300; }
+        .price { font-size: 1.8rem; color: var(--accent-gold); margin: 20px 0; }
 
-        /* --- BUTTONS --- */
-        .btn-group { display: flex; gap: 15px; justify-content: center; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
 
         .btn {
-            padding: 14px 28px;
-            border: none;
+            padding: 12px;
             border-radius: 2px;
             cursor: pointer;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
             text-decoration: none;
             text-transform: uppercase;
-            transition: all 0.3s;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        .order-btn { background: var(--accent-gold); color: #000; font-weight: bold; }
-        .cart-btn { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
-        
-        .btn:hover { letter-spacing: 2px; box-shadow: 0 0 20px rgba(251, 191, 36, 0.2); }
+        .order-btn { background: var(--accent-gold); color: #000; font-weight: bold; border: none; }
+        .cart-btn { background: transparent; color: white; border: 1px solid white; }
+        .btn:hover { opacity: 0.8; letter-spacing: 2px; }
 
-        footer { text-align: center; padding: 100px 20px; opacity: 0.3; font-size: 0.7rem; letter-spacing: 2px; }
+        footer { text-align: center; padding: 50px; opacity: 0.3; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -138,46 +171,127 @@
         <div class="beam"></div>
     </div>
 
+    <button id="cart-toggle" onclick="toggleCart()">
+        <span>CART</span>
+        <span id="cart-count" style="background: #000; color: #fff; padding: 2px 8px; border-radius: 10px;">0</span>
+    </button>
+
+    <div id="cart-sidebar">
+        <button onclick="toggleCart()" style="background:none; border:none; color:var(--accent-gold); cursor:pointer; margin-bottom: 20px;">✕ CLOSE</button>
+        <h2 style="font-weight: 200; letter-spacing: 2px;">YOUR CART</h2>
+        <div id="cart-items"></div>
+        <div style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
+            <div style="display:flex; justify-content:space-between; font-size: 1.2rem;">
+                <span>Total:</span>
+                <span id="cart-total" style="color:var(--accent-gold)">₹0</span>
+            </div>
+            <button onclick="checkout()" style="width:100%; margin-top: 20px; padding: 15px; background:var(--accent-gold); border:none; font-weight:bold; cursor:pointer;">ORDER VIA WHATSAPP</button>
+        </div>
+    </div>
+
     <header>
         <h1>VELVET PAGES</h1>
-        <div class="tagline">Minimalist Ebooks & Stories</div>
+        <div class="tagline">Ebooks for the Curious</div>
     </header>
 
     <div class="book-section">
         <div class="book-card">
             <h2>The First Chapter</h2>
-            <p>An exploration into the art of beginning.</p>
-            <div class="price">₹99</div>
+            <p>Mastering the art of beginnings.</p>
+            <div class="price">99</div>
             <div class="btn-group">
-                <a href="https://wa.me/917029043459?text=Order:%20The%20First%20Chapter" class="btn order-btn">Order via WhatsApp</a>
-                <button class="btn cart-btn">Add to Cart</button>
+                <a href="https://wa.me/917029043459?text=Order:%20The%20First%20Chapter" class="btn order-btn">Buy Now</a>
+                <button class="btn cart-btn" onclick="addToCart('The First Chapter', 99)">Add to Cart</button>
             </div>
         </div>
 
         <div class="book-card">
             <h2>Velvet Nights</h2>
-            <p>A collection of midnight thoughts and poetry.</p>
-            <div class="price">₹199</div>
+            <p>A journey through midnight prose.</p>
+            <div class="price">199</div>
             <div class="btn-group">
-                <a href="https://wa.me/917029043459?text=Order:%20Velvet%20Nights" class="btn order-btn">Order via WhatsApp</a>
-                <button class="btn cart-btn">Add to Cart</button>
+                <a href="https://wa.me/917029043459?text=Order:%20Velvet%20Nights" class="btn order-btn">Buy Now</a>
+                <button class="btn cart-btn" onclick="addToCart('Velvet Nights', 199)">Add to Cart</button>
             </div>
         </div>
 
         <div class="book-card">
-            <h2>The Lighthouse Keeper</h2>
-            <p>A deep dive into solitude and creativity.</p>
-            <div class="price">₹299</div>
+            <h2>The Keeper's Log</h2>
+            <p>Secrets of the eternal lighthouse.</p>
+            <div class="price">299</div>
             <div class="btn-group">
-                <a href="https://wa.me/917029043459?text=Order:%20The%20Lighthouse%20Keeper" class="btn order-btn">Order via WhatsApp</a>
-                <button class="btn cart-btn">Add to Cart</button>
+                <a href="https://wa.me/917029043459?text=Order:%20The%20Keepers%20Log" class="btn order-btn">Buy Now</a>
+                <button class="btn cart-btn" onclick="addToCart('The Keepers Log', 299)">Add to Cart</button>
             </div>
         </div>
     </div>
 
     <footer>
-        &copy; 2026 VELVET PAGES | PH: 7029043459
+        &copy; 2026 Velvet Pages | WhatsApp: 7029043459
     </footer>
 
+    <script>
+        let cart = [];
+        
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            if(sidebar.style.right === '0px') {
+                sidebar.style.right = '-350px';
+            } else {
+                sidebar.style.right = '0px';
+            }
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            // Automatically open cart to show item added
+            document.getElementById('cart-sidebar').style.right = '0px';
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cart-items');
+            const count = document.getElementById('cart-count');
+            const totalEl = document.getElementById('cart-total');
+            
+            list.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>₹${item.price} <button onclick="removeItem(${index})" style="background:none; border:none; color:#ff4444; cursor:pointer;">✕</button></span>
+                    </div>`;
+            });
+            
+            count.innerText = cart.length;
+            totalEl.innerText = `₹${total}`;
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            
+            let message = "Hello Velvet Pages! I'd like to order:%0A";
+            let total = 0;
+            cart.forEach(item => {
+                message += `- ${item.name} (₹${item.price})%0A`;
+                total += item.price;
+            });
+            message += `%0A*Grand Total: ₹${total}*`;
+            
+            window.open(`https://wa.me/917029043459?text=${message}`, '_blank');
+        }
+    </script>
 </body>
-</html>
+    </html>
+    
